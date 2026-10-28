@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Feliz Aniversário ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="particulas"></div>
+
+    <main class="container">
+
+        <h1>🎂 Feliz Aniversário!</h1>
+
+        <p class="subtitulo">
+            Preparei uma pequena surpresa para você...
+        </p>
+
+        <!-- Presente -->
+
+        <div id="presente">
+
+            <div class="tampa"></div>
+
+            <div class="caixa"></div>
+
+            <div class="envelope">
+
+                <div class="papel">
+                    <div class="folha"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Carta -->
+
+        <section id="carta" class="escondido">
+
+            <h2>💌 Uma mensagem</h2>
+
+            <p id="texto"></p>
+
+        </section>
+
+        <!-- Foto, assinatura, música e botão final -->
+
+        <div id="foto-container">
+
+            <div class="polaroid">
+
+                <div class="coracao-foto">🤍</div>
+
+                <img
+                    src="imagens/fundopreto.jpeg"
+                    id="foto"
+                    alt="Uma lembrança especial"
+                >
+
+                <p class="legenda-polaroid">
+                    Um momento que sempre vou guardar com carinho. 🤍
+                </p>
+
+            </div>
+
+            <p id="assinatura" class="assinatura">
+                Com carinho,<br>
+                nome 🤍
+            </p>
+
+            <div class="controle-musica">
+
+                <button id="botao-musica" type="button">
+                    ▶️ Tocar nossa música
+                </button>
+
+                <audio id="musica" loop>
+
+                    <source
+                        src="Cópia Proibida - Léo Foguete(MP3_160K).mp3"
+                        type="audio/mpeg"
+                    >
+
+                    Seu navegador não suporta áudio.
+
+                </audio>
+
+            </div>
+
+            <button id="botao-surpresa" type="button">
+                🤍 Abrir última surpresa
+            </button>
+
+        </div>
+
+    </main>
+
+    <!-- Última surpresa -->
+
+    <div id="surpresa-final" class="surpresa-final">
+
+        <div class="conteudo-surpresa">
+
+            <button
+                id="fechar-surpresa"
+                class="fechar-surpresa"
+                type="button"
+                aria-label="Fechar surpresa"
+            >
+                ×
+            </button>
+
+            <div class="coracao-final">🤍</div>
+
+            <h2>Uma última mensagem</h2>
+
+            <p>
+                texto
+                <br>
+                texto
+                <br><br>
+                Feliz aniversário!🤎
+            </p>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

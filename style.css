@@ -1,0 +1,922 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    overflow-x: hidden;
+
+    background: linear-gradient(135deg, #ffd1dc, #ffeef3);
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+
+    width: 90%;
+    max-width: 700px;
+
+    margin: 20px auto;
+    padding: 40px;
+
+    text-align: center;
+
+    background: white;
+
+    border-radius: 25px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    margin-bottom: 15px;
+
+    color: #ff4f87;
+}
+
+.subtitulo {
+    margin-bottom: 40px;
+
+    font-size: 20px;
+}
+
+.escondido {
+    display: none;
+}
+
+/* Presente */
+
+#presente {
+    position: relative;
+
+    width: 180px;
+    height: 150px;
+
+    margin: 30px auto;
+
+    cursor: pointer;
+}
+
+.caixa {
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 180px;
+    height: 120px;
+
+    transform: translateX(-50%);
+
+    background: #ff4f87;
+
+    border-radius: 10px;
+}
+
+.caixa::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+
+    width: 25px;
+    height: 120px;
+
+    transform: translateX(-50%);
+
+    background: #ffd1dc;
+}
+
+.tampa {
+    position: absolute;
+
+    left: 50%;
+    top: 15px;
+
+    z-index: 4;
+
+    width: 200px;
+    height: 35px;
+
+    transform: translateX(-50%);
+
+    background: #ff7ba8;
+
+    border-radius: 10px;
+
+    transition: transform 0.8s ease;
+}
+
+.tampa::before {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+
+    width: 25px;
+    height: 35px;
+
+    transform: translateX(-50%);
+
+    background: #ffd1dc;
+}
+
+/* Envelope */
+
+.envelope {
+    position: absolute;
+
+    left: 50%;
+    bottom: 20px;
+
+    z-index: 3;
+
+    width: 120px;
+    height: 80px;
+
+    opacity: 0;
+
+    transform: translateX(-50%) translateY(50px);
+
+    background: white;
+
+    border-radius: 8px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.envelope::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #ffeef3;
+
+    clip-path: polygon(0 0, 50% 50%, 100% 0);
+}
+
+.papel {
+    position: relative;
+
+    z-index: 2;
+
+    padding-top: 15px;
+}
+
+.folha {
+    width: 80px;
+    height: 100px;
+
+    margin: 0 auto;
+
+    transform: translateY(35px);
+
+    background: white;
+
+    border-radius: 6px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    transition: transform 1s ease;
+}
+
+.folha::before {
+    content: "❤";
+
+    display: block;
+
+    padding-top: 12px;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    color: #ff4f87;
+}
+
+.folha::after {
+    content: "";
+
+    display: block;
+
+    width: 60px;
+    height: 40px;
+
+    margin: 12px auto;
+
+    background:
+        linear-gradient(#dddddd 2px, transparent 2px);
+
+    background-size: 100% 10px;
+}
+
+/* Animações do presente */
+
+@keyframes tremer {
+    0% {
+        transform: rotate(-4deg);
+    }
+
+    25% {
+        transform: rotate(4deg);
+    }
+
+    50% {
+        transform: rotate(-4deg);
+    }
+
+    75% {
+        transform: rotate(4deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.treme {
+    animation: tremer 0.25s infinite;
+}
+
+.abrir .tampa {
+    transform:
+        translateX(-50%)
+        translateY(-60px)
+        rotate(-10deg);
+}
+
+.abrir .envelope {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(-120px);
+}
+
+.abrir .folha {
+    transform: translateY(-40px);
+}
+
+.abrir::after {
+    content: "✨";
+
+    position: absolute;
+
+    left: 50%;
+    top: -70px;
+
+    font-size: 50px;
+
+    transform: translateX(-50%);
+
+    animation: brilho 1s infinite;
+}
+
+@keyframes brilho {
+    0% {
+        opacity: 0;
+        scale: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+        scale: 1.3;
+    }
+
+    100% {
+        opacity: 0;
+        scale: 0.5;
+    }
+}
+
+/* Carta */
+
+#carta {
+    width: 100%;
+
+    margin-top: 30px;
+    padding: 30px;
+
+    opacity: 0;
+
+    background: linear-gradient(#fffdf9, #fff8f0);
+
+border: 1px solid #efd6c4;
+    border-radius: 15px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+#carta h2 {
+    margin-bottom: 15px;
+
+    color: #ff4f87;
+}
+
+#texto {
+    width: 100%;
+
+    margin-top: 20px;
+
+    color: #444444;
+
+    font-size: 18px;
+    line-height: 1.8;
+
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animar {
+    animation: aparecer 1s ease forwards;
+}
+
+/* Polaroid */
+
+#foto-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 35px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(60px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease,
+        visibility 1.2s ease;
+}
+
+#foto-container.foto-aparecer {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateY(0);
+}
+
+.polaroid {
+    position: relative;
+
+    width: 280px;
+    max-width: 100%;
+
+    padding: 12px 12px 75px;
+
+    transform: rotate(-5deg);
+
+    background: white;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 20px 35px rgba(0, 0, 0, 0.25),
+        0 0 25px rgba(255, 105, 180, 0.15);
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+
+    overflow: hidden;
+}
+
+#foto {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    border-radius: 4px;
+}
+
+.legenda-polaroid {
+    position: absolute;
+
+    left: 15px;
+    right: 15px;
+    bottom: 14px;
+
+    margin: 0;
+
+    color: #7b4d4d;
+
+    font-family: "Brush Script MT", "Segoe Print", cursive;
+    font-size: 20px;
+    line-height: 1.25;
+    text-align: center;
+}
+
+/* Corações */
+
+#particulas {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.coracao {
+    position: absolute;
+
+    font-size: 25px;
+
+    animation: subir 4s linear forwards;
+}
+
+@keyframes subir {
+    from {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(0.5);
+    }
+
+    to {
+        opacity: 0;
+
+        transform:
+            translateY(-250px)
+            scale(1.5);
+    }
+}
+
+/* Pétalas */
+
+.petala {
+    position: fixed;
+
+    top: -50px;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    animation: cair 8s linear forwards;
+}
+
+@keyframes cair {
+    from {
+        opacity: 1;
+
+        transform:
+            translateY(-50px)
+            rotate(0deg);
+    }
+
+    to {
+        opacity: 0;
+
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+    }
+}
+
+/* Celular */
+
+@media (max-width: 600px) {
+    body {
+        align-items: flex-start;
+
+        padding: 15px;
+    }
+
+    .container {
+        width: 100%;
+
+        margin: 10px auto;
+        padding: 25px 18px;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    .subtitulo {
+        font-size: 17px;
+    }
+
+    #presente {
+        transform: scale(0.85);
+
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    #carta {
+        padding: 20px 16px;
+    }
+
+    #texto {
+        font-size: 16px;
+    }
+
+    .polaroid {
+    position: relative;
+
+    width: 280px;
+    max-width: calc(100vw - 80px);
+
+    padding: 12px 12px 75px;
+
+    transform: rotate(-5deg);
+
+    background: white;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 20px 35px rgba(0, 0, 0, 0.25),
+        0 0 25px rgba(255, 105, 180, 0.15);
+
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.5s ease;
+
+    overflow: visible;
+}
+
+    .legenda-polaroid {
+        font-size: 18px;
+    }
+}
+
+.polaroid::after{
+    content:"";
+
+    position:absolute;
+
+    width:90px;
+    height:25px;
+
+    background:rgba(255,192,203,.65);
+
+    top:-10px;
+    left:95px;
+
+    transform:rotate(-8deg);
+
+    border-radius:4px;
+}
+
+
+
+.polaroid::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-130%;
+
+    width:45%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.6),
+        transparent
+    );
+
+    transform:skewX(-25deg);
+
+    animation: brilhoFoto 3s ease-in-out infinite;
+}
+
+ @keyframes brilhoFoto {
+    0% {
+        left: -130%;
+    }
+
+    100% {
+        left: 180%;
+    }
+}
+
+.polaroid .coracao-foto{
+
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    font-size:22px;
+
+    transform:rotate(15deg);
+}
+
+.polaroid:hover{
+
+    transform:
+        rotate(0deg)
+        scale(1.05);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.30);
+
+}
+
+
+.assinatura{
+
+    margin-top:20px;
+
+    text-align:center;
+
+    font-family:"Brush Script MT","Segoe Script",cursive;
+
+    font-size:28px;
+
+    color:#c05a7d;
+
+    opacity:0;
+
+    transform:translateY(20px);
+
+    transition:.8s;
+
+}
+
+.assinatura-aparecer{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+.controle-musica {
+    margin-top: 20px;
+}
+
+#botao-musica {
+    padding: 12px 22px;
+
+    border: none;
+    border-radius: 25px;
+
+    background: #ff7ba8;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 6px 15px rgba(255, 79, 135, 0.3);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+#botao-musica:hover {
+    transform: scale(1.05);
+
+    background: #ff4f87;
+}
+
+#botao-musica:active {
+    transform: scale(0.97);
+}
+
+#botao-surpresa {
+
+    display: block;
+
+    margin: 22px auto 0;
+    padding: 13px 24px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: linear-gradient(
+        135deg,
+        #ff8db3,
+        #ff5f96
+    );
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(255, 79, 135, 0.3);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+#botao-surpresa:hover {
+
+    transform: translateY(-3px) scale(1.03);
+
+    box-shadow:
+        0 12px 25px rgba(255, 79, 135, 0.4);
+}
+
+#botao-surpresa:active {
+
+    transform: scale(0.97);
+}
+
+
+/* Fundo da surpresa final */
+
+.surpresa-final {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background: rgba(70, 25, 45, 0.6);
+
+    backdrop-filter: blur(8px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    z-index: 9999;
+
+    transition:
+        opacity 0.6s ease,
+        visibility 0.6s ease;
+}
+
+.surpresa-final.aberta {
+
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Caixa da mensagem */
+
+.conteudo-surpresa {
+
+    position: relative;
+
+    width: min(90%, 500px);
+
+    padding: 50px 35px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdf9,
+            #fff2f6
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.25);
+
+    transform: translateY(40px) scale(0.9);
+
+    transition:
+        transform 0.6s ease;
+}
+
+.surpresa-final.aberta .conteudo-surpresa {
+
+    transform: translateY(0) scale(1);
+}
+
+.conteudo-surpresa h2 {
+
+    margin: 10px 0 18px;
+
+    color: #c34f78;
+
+    font-size: 30px;
+}
+
+.conteudo-surpresa p {
+
+    margin: 0;
+
+    color: #744557;
+
+    font-size: 20px;
+    line-height: 1.7;
+}
+
+.coracao-final {
+
+    font-size: 48px;
+
+    animation: pulsarCoracao 1.3s infinite;
+}
+
+.fechar-surpresa {
+
+    position: absolute;
+
+    top: 12px;
+    right: 16px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #c05a7d;
+
+    font-size: 32px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+@keyframes pulsarCoracao {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+#texto{
+    white-space: pre-line;
+}
+
+.controle-musica {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    margin-top: 20px;
+}
+
+#botao-surpresa {
+    margin-top: 22px;
+}
